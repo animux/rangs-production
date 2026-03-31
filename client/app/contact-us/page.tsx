@@ -13,19 +13,6 @@ import {
 } from "lucide-react"
 import { SiTiktok } from "@icons-pack/react-simple-icons"
 
-const officeLocations = [
-  {
-    title: "Head Office",
-    location: "8425 wiseman ave \nMontreal, Quebec H3n 2p5",
-    icon: Building2,
-  },
-  {
-    title: "Dhaka Office",
-    location: "Baridhara Diplomatic Zone",
-    icon: MapPin,
-  },
-]
-
 const contactChannels = [
   {
     label: "Email",
@@ -97,58 +84,6 @@ export default function Page() {
           </motion.div>
         </div>
       </section>
-
-      <section className="relative bg-white py-20 dark:bg-secondary">
-        <div className="pointer-events-none absolute inset-x-0 top-0 h-0.5 bg-linear-to-r from-transparent via-primary/80 to-transparent" />
-        <div className="container mx-auto px-5">
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.55, ease: "easeOut" }}
-            viewport={{ once: true }}
-            className="mx-auto max-w-3xl space-y-3 text-center"
-          >
-            <p className="text-xs font-semibold tracking-[0.35em] text-primary uppercase">
-              Our Presence
-            </p>
-            <h2 className="text-4xl font-bold text-secondary sm:text-5xl dark:text-white">
-              Offices Across Two Continents
-            </h2>
-          </motion.div>
-
-          <div className="mt-12 grid gap-5 md:grid-cols-2">
-            {officeLocations.map((office, index) => {
-              const Icon = office.icon
-
-              return (
-                <motion.article
-                  key={office.title}
-                  initial={{ opacity: 0, y: 24 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{
-                    duration: 0.5,
-                    ease: "easeOut",
-                    delay: index * 0.1,
-                  }}
-                  viewport={{ once: true }}
-                  className="group relative overflow-hidden rounded-3xl border border-primary/20 bg-linear-to-b from-white to-primary/8 p-7 shadow-[0_20px_55px_rgba(0,0,0,0.08)] transition-all duration-300 hover:-translate-y-1 hover:border-primary/45 dark:border-white/15 dark:from-secondary dark:to-secondary/85"
-                >
-                  <div className="mb-5 inline-flex h-11 w-11 items-center justify-center rounded-full bg-primary/15 text-primary transition-colors duration-300 group-hover:bg-primary group-hover:text-white">
-                    <Icon className="h-5 w-5" />
-                  </div>
-                  <p className="text-sm font-semibold tracking-[0.2em] text-primary uppercase">
-                    {office.title}
-                  </p>
-                  <h3 className="mt-2 text-2xl leading-tight font-semibold text-secondary dark:text-white">
-                    {office.location}
-                  </h3>
-                </motion.article>
-              )
-            })}
-          </div>
-        </div>
-      </section>
-
       <section className="relative overflow-hidden bg-secondary py-20 text-white">
         <div className="pointer-events-none absolute -top-24 -right-16 h-64 w-64 rounded-full bg-primary/20 blur-3xl" />
         <div className="pointer-events-none absolute -bottom-28 -left-20 h-72 w-72 rounded-full bg-primary/15 blur-3xl" />
@@ -204,7 +139,6 @@ export default function Page() {
           </div>
         </div>
       </section>
-
       <section className="relative overflow-hidden bg-white py-20 dark:bg-secondary">
         <div className="pointer-events-none absolute inset-x-0 top-0 h-0.5 bg-linear-to-r from-transparent via-primary/70 to-transparent" />
         <div className="container mx-auto px-5">

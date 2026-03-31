@@ -110,7 +110,7 @@ export default function Page() {
               <Quote className="h-5 w-5" />
             </div>
             <p className="text-xs font-semibold tracking-[0.35em] text-primary uppercase">
-              Founder Message
+              Founder's Message
             </p>
             <div className="mt-4 flex flex-row items-center gap-3">
               <img
