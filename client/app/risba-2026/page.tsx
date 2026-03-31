@@ -1,6 +1,7 @@
 "use client"
 
 import { motion } from "motion/react"
+import Image from "next/image"
 import {
   Award,
   Camera,
@@ -109,6 +110,54 @@ export default function Page() {
               Prestige, Performance, and Presence
             </h2>
           </motion.div>
+
+          <div className="mt-10 grid gap-5 md:grid-cols-3">
+            <motion.div
+              initial={{ opacity: 0, y: 22 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, ease: "easeOut" }}
+              viewport={{ once: true }}
+              className="relative aspect-4/3 overflow-hidden rounded-3xl"
+            >
+              <Image
+                src="/entrance-risba.jpeg"
+                alt="RISBA entrance"
+                fill
+                className="object-cover"
+                sizes="(min-width: 768px) 33vw, 100vw"
+              />
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 22 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, ease: "easeOut", delay: 0.08 }}
+              viewport={{ once: true }}
+              className="relative aspect-4/3 overflow-hidden rounded-3xl"
+            >
+              <Image
+                src="/hall-risba.jpeg"
+                alt="RISBA hall view"
+                fill
+                className="object-cover"
+                sizes="(min-width: 768px) 33vw, 100vw"
+              />
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 22 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, ease: "easeOut", delay: 0.16 }}
+              viewport={{ once: true }}
+              className="relative aspect-4/3 overflow-hidden rounded-3xl"
+            >
+              <Image
+                src="/venue-risba.jpeg"
+                alt="RISBA venue"
+                fill
+                className="object-cover"
+                sizes="(min-width: 768px) 33vw, 100vw"
+              />
+            </motion.div>
+          </div>
 
           <div className="mt-12 grid gap-5 md:grid-cols-2">
             {eventFeatures.map((feature, index) => {

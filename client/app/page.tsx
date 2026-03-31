@@ -2,10 +2,12 @@
 
 import { useEffect, useState } from "react"
 import Link from "next/link"
-import { motion } from "motion/react"
+import { AnimatePresence, motion } from "motion/react"
 import {
   Building2,
   CalendarDays,
+  ChevronLeft,
+  ChevronRight,
   MapPin,
   Newspaper,
   ExternalLink,
@@ -94,7 +96,7 @@ export default function Page() {
     },
     {
       name: "Kumar Sanu",
-      image: "/artist/kumar-sanu.webp",
+      image: "/artist/kumar-sanu.jpg",
       layout: "default",
     },
     {
@@ -119,7 +121,7 @@ export default function Page() {
     },
     {
       name: "Balam",
-      image: "/artist/balam.jpg",
+      image: "/artist/balam.png",
       layout: "default",
     },
     {
@@ -148,11 +150,6 @@ export default function Page() {
       layout: "default",
     },
     {
-      name: "Amin Khan",
-      image: "/artist/amin-khan.jpg",
-      layout: "default",
-    },
-    {
       name: "Keya Payel",
       image: "/artist/keya-payel.jpg",
       layout: "default",
@@ -177,9 +174,92 @@ export default function Page() {
       image: "/artist/tosiba-begum.jpg",
       layout: "default",
     },
+    {
+      name: "Shopnil Tazrian Iccha",
+      image: "/artist/shopnil-tazrian.jpg",
+      layout: "default",
+    },
+    {
+      name: "Bidya Sinha Saha Mim",
+      image: "/artist/bidya-sinha.jpg",
+      layout: "default",
+    },
+    {
+      name: "Ashes",
+      image: "/artist/ashes.png",
+      layout: "default",
+    },
   ]
 
   const [showImpactCounters, setShowImpactCounters] = useState(false)
+  const [spotlightIndex, setSpotlightIndex] = useState(0)
+  const [touchStartX, setTouchStartX] = useState<number | null>(null)
+
+  const spotlightEvents = [
+    {
+      kicker: "Next Event",
+      title: "RISBA 2026",
+      subtitle: "Rang International Star & Business Awards - Season 2",
+      description:
+        "An international awards ceremony recognizing excellence across entertainment, business, leadership, and entrepreneurship.",
+      location: "Dhaka, Bangladesh",
+      date: "November 2026",
+      venue: "Bangladesh China Friendship Conference Centre (BCFCC)",
+      details:
+        "The event will bring together celebrities, entrepreneurs, corporate leaders, and global personalities under one prestigious platform.",
+      href: "/risba-2026",
+      cta: "View Event Details",
+      backgroundImage: "/venue-risba.jpeg",
+    },
+    {
+      kicker: "Live Concert",
+      title: "VISHAL-SHEKHAR LIVE IN MONTREAL",
+      subtitle: "Bollywood's Hitmakers - A Night to Remember",
+      description:
+        "An electrifying live concert featuring one of Bollywood's most iconic music composer duos, delivering a night filled with chart-topping hits and high-energy performances",
+      location: "Montreal, Canada",
+      date: "16 August 2026",
+      venue: "Theatre Saint-Denis, Montreal",
+      details:
+        "This spectacular musical night will bring together fans, music lovers, and the South Asian community for a premium entertainment experience filled with live performances, vibrant energy, and world-class production.",
+      href: "/veshal-shekhar-live-in-montreal",
+      cta: "View Event Details",
+      backgroundImage: "/venue-montreal.jpeg",
+    },
+  ]
+
+  const activeSpotlight = spotlightEvents[spotlightIndex]
+
+  const goToPreviousSpotlight = () => {
+    setSpotlightIndex((previous) =>
+      previous === 0 ? spotlightEvents.length - 1 : previous - 1
+    )
+  }
+
+  const goToNextSpotlight = () => {
+    setSpotlightIndex((previous) => (previous + 1) % spotlightEvents.length)
+  }
+
+  const handleSpotlightTouchStart = (event: React.TouchEvent<HTMLElement>) => {
+    setTouchStartX(event.changedTouches[0].clientX)
+  }
+
+  const handleSpotlightTouchEnd = (event: React.TouchEvent<HTMLElement>) => {
+    if (touchStartX === null) return
+
+    const touchEndX = event.changedTouches[0].clientX
+    const swipeDistance = touchStartX - touchEndX
+
+    if (Math.abs(swipeDistance) > 60) {
+      if (swipeDistance > 0) {
+        goToNextSpotlight()
+      } else {
+        goToPreviousSpotlight()
+      }
+    }
+
+    setTouchStartX(null)
+  }
 
   const impactHighlights = [
     "16+ Years of Excellence",
@@ -272,11 +352,11 @@ export default function Page() {
           className="relative z-10 w-full"
         >
           <div className="mx-auto max-w-6xl space-y-5 px-5 sm:space-y-6">
-            <h2 className="max-w-4xl text-3xl leading-tight font-bold text-primary sm:text-4xl lg:text-5xl">
+            <h2 className="max-w-4xl text-xl leading-tight font-bold text-primary sm:text-4xl lg:text-5xl">
               After Success in Canada, RISBA Arrives in{" "}
               <span className="underline">Bangladesh</span>
             </h2>
-            <p className="max-w-3xl text-base leading-relaxed text-white/90 sm:text-lg lg:text-xl">
+            <p className="max-w-3xl text-xs leading-relaxed text-white/90 sm:text-lg lg:text-xl">
               The Rang International Star & Business Awards returns with Season
               2 — bringing together global celebrities, industry leaders, and
               cultural icons on one prestigious stage in Dhaka.
@@ -284,14 +364,14 @@ export default function Page() {
             <div className="flex flex-col gap-3 pt-2 sm:flex-row sm:gap-2">
               <Button
                 variant="outline"
-                className="w-full cursor-pointer rounded border-primary bg-black/20 px-8 py-6 text-sm font-extrabold text-primary transition-all duration-300 hover:bg-primary hover:text-secondary sm:w-auto"
+                className="w-full cursor-pointer rounded border-primary bg-black/20 px-8 py-6 text-xs font-extrabold text-primary transition-all duration-300 hover:bg-primary hover:text-secondary sm:w-auto"
                 size="lg"
               >
                 <Link href="/risba-2026">Explore RISBA 2026</Link>
               </Button>
               <Button
                 variant="default"
-                className="w-full cursor-pointer rounded px-8 py-6 text-sm font-extrabold text-secondary uppercase transition-all duration-300 sm:w-auto"
+                className="w-full cursor-pointer rounded px-8 py-6 text-xs font-extrabold text-secondary uppercase transition-all duration-300 sm:w-auto"
                 size="lg"
               >
                 <Link href="/become-a-sponsor">Become a Sponsor</Link>
@@ -365,21 +445,33 @@ export default function Page() {
         </div>
       </section>
 
-      <section
-        className="bg-cover bg-center bg-no-repeat py-20 dark:bg-secondary"
-        style={{ backgroundImage: "url('/venue-risba.jpeg')" }}
-      >
+      <section className="relative overflow-hidden py-20 dark:bg-secondary">
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={activeSpotlight.backgroundImage}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.65, ease: "easeInOut" }}
+            className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat"
+            style={{
+              backgroundImage: `url('${activeSpotlight.backgroundImage}')`,
+            }}
+          />
+        </AnimatePresence>
+        <div className="pointer-events-none absolute inset-0 z-10 bg-black/35" />
+
         <motion.h1
-          initial={{ opacity: 0.5, y: 100 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, y: 60 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{
             delay: 0.3,
             duration: 0.8,
-            ease: "easeInOut",
+            ease: "easeIn",
           }}
-          className="bg-linear-to-br from-white via-primary to-primary bg-clip-text text-center text-4xl font-medium tracking-tight text-transparent md:text-6xl"
+          className="relative z-20 bg-linear-to-br from-white via-primary to-primary bg-clip-text text-center text-4xl font-medium tracking-tight text-transparent md:text-6xl"
         >
-          Event in Spotlight
+          Event In Spotlight
         </motion.h1>
 
         <motion.section
@@ -387,81 +479,109 @@ export default function Page() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: "easeOut", delay: 0.5 }}
           viewport={{ once: true }}
-          className="mx-auto mt-12 max-w-5xl px-5"
+          className="relative z-20 mx-auto mt-12 max-w-5xl px-5"
+          onTouchStart={handleSpotlightTouchStart}
+          onTouchEnd={handleSpotlightTouchEnd}
         >
           <div className="relative overflow-hidden rounded-4xl border border-primary/25 bg-white p-7 shadow-[0_25px_80px_rgba(0,0,0,0.08)] sm:p-10 dark:bg-black">
             <div className="pointer-events-none absolute -top-28 -right-24 h-64 w-64 rounded-full bg-primary/20 blur-3xl" />
             <div className="pointer-events-none absolute -bottom-40 -left-20 h-64 w-64 rounded-full bg-primary/10 blur-3xl" />
 
-            <div className="relative space-y-6 dark:text-white">
-              <p className="text-xs font-semibold tracking-[0.3em] text-primary uppercase">
-                Next Event
-              </p>
-
-              <div className="space-y-3">
-                <h2 className="text-4xl font-bold text-secondary sm:text-5xl dark:text-white">
-                  RISBA 2026
-                </h2>
-                <p className="max-w-3xl text-lg font-medium text-secondary/85 dark:text-white/85">
-                  Rang International Star &amp; Business Awards - Season 2
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={activeSpotlight.title}
+                initial={{ opacity: 0, y: 18 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -18 }}
+                transition={{ duration: 0.45, ease: "easeInOut" }}
+                className="relative space-y-6 dark:text-white"
+              >
+                <p className="text-xs font-semibold tracking-[0.3em] text-primary uppercase">
+                  {activeSpotlight.kicker}
                 </p>
-              </div>
 
-              <p className="max-w-4xl text-base leading-relaxed text-secondary/80 sm:text-lg dark:text-white/80">
-                An international awards ceremony recognizing excellence across
-                entertainment, business, leadership, and entrepreneurship.
-              </p>
+                <div className="space-y-3">
+                  <h2 className="text-4xl font-bold text-secondary sm:text-5xl dark:text-white">
+                    {activeSpotlight.title}
+                  </h2>
+                  <p className="max-w-3xl text-lg font-medium text-secondary/85 dark:text-white/85">
+                    {activeSpotlight.subtitle}
+                  </p>
+                </div>
 
-              <div className="grid gap-3 text-sm sm:grid-cols-3 sm:text-base">
-                <div className="group rounded-2xl border border-primary/20 bg-primary/5 px-4 py-3 text-secondary transition-all duration-300 hover:-translate-y-1 hover:border-primary/45 hover:bg-primary/10 hover:shadow-[0_12px_30px_rgba(0,0,0,0.08)] dark:bg-secondary/10 dark:text-white dark:hover:bg-secondary/20">
-                  <div className="flex items-center gap-3">
-                    <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-primary/15 text-primary transition-colors duration-300 group-hover:bg-primary group-hover:text-white dark:bg-secondary/20 dark:text-white dark:group-hover:bg-primary dark:group-hover:text-white">
-                      <MapPin aria-hidden="true" className="h-4 w-4 shrink-0" />
-                    </span>
-                    <span>Dhaka, Bangladesh</span>
+                <p className="max-w-4xl text-base leading-relaxed text-secondary/80 sm:text-lg dark:text-white/80">
+                  {activeSpotlight.description}
+                </p>
+
+                <div className="grid gap-3 text-sm sm:grid-cols-3 sm:text-base">
+                  <div className="group rounded-2xl border border-primary/20 bg-primary/5 px-4 py-3 text-secondary transition-all duration-300 hover:-translate-y-1 hover:border-primary/45 hover:bg-primary/10 hover:shadow-[0_12px_30px_rgba(0,0,0,0.08)] dark:bg-secondary/10 dark:text-white dark:hover:bg-secondary/20">
+                    <div className="flex items-center gap-3">
+                      <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-primary/15 text-primary transition-colors duration-300 group-hover:bg-primary group-hover:text-white dark:bg-secondary/20 dark:text-white dark:group-hover:bg-primary dark:group-hover:text-white">
+                        <MapPin
+                          aria-hidden="true"
+                          className="h-4 w-4 shrink-0"
+                        />
+                      </span>
+                      <span>{activeSpotlight.location}</span>
+                    </div>
+                  </div>
+                  <div className="group rounded-2xl border border-primary/20 bg-primary/5 px-4 py-3 text-secondary transition-all duration-300 hover:-translate-y-1 hover:border-primary/45 hover:bg-primary/10 hover:shadow-[0_12px_30px_rgba(0,0,0,0.08)] dark:bg-secondary/10 dark:text-white dark:hover:bg-secondary/20">
+                    <div className="flex items-center gap-3">
+                      <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-primary/15 text-primary transition-colors duration-300 group-hover:bg-primary group-hover:text-white dark:bg-secondary/20 dark:text-white dark:group-hover:bg-primary dark:group-hover:text-white">
+                        <CalendarDays
+                          aria-hidden="true"
+                          className="h-4 w-4 shrink-0"
+                        />
+                      </span>
+                      <span>{activeSpotlight.date}</span>
+                    </div>
+                  </div>
+                  <div className="group rounded-2xl border border-primary/20 bg-primary/5 px-4 py-3 text-secondary transition-all duration-300 hover:-translate-y-1 hover:border-primary/45 hover:bg-primary/10 hover:shadow-[0_12px_30px_rgba(0,0,0,0.08)] dark:bg-secondary/10 dark:text-white dark:hover:bg-secondary/20">
+                    <div className="flex items-center gap-3">
+                      <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-primary/15 text-primary transition-colors duration-300 group-hover:bg-primary group-hover:text-white dark:bg-secondary/20 dark:text-white dark:group-hover:bg-primary dark:group-hover:text-white">
+                        <Building2
+                          aria-hidden="true"
+                          className="h-4 w-4 shrink-0"
+                        />
+                      </span>
+                      <span>{activeSpotlight.venue}</span>
+                    </div>
                   </div>
                 </div>
-                <div className="group rounded-2xl border border-primary/20 bg-primary/5 px-4 py-3 text-secondary transition-all duration-300 hover:-translate-y-1 hover:border-primary/45 hover:bg-primary/10 hover:shadow-[0_12px_30px_rgba(0,0,0,0.08)] dark:bg-secondary/10 dark:text-white dark:hover:bg-secondary/20">
-                  <div className="flex items-center gap-3">
-                    <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-primary/15 text-primary transition-colors duration-300 group-hover:bg-primary group-hover:text-white dark:bg-secondary/20 dark:text-white dark:group-hover:bg-primary dark:group-hover:text-white">
-                      <CalendarDays
-                        aria-hidden="true"
-                        className="h-4 w-4 shrink-0"
-                      />
-                    </span>
-                    <span>November 2026</span>
+
+                <p className="max-w-4xl text-sm leading-relaxed text-secondary/75 sm:text-base dark:text-white/75">
+                  {activeSpotlight.details}
+                </p>
+
+                <div className="flex flex-wrap items-center justify-between gap-4 pt-2">
+                  <Link
+                    href={activeSpotlight.href}
+                    className="inline-flex items-center justify-center rounded-md bg-primary px-8 py-3 text-sm font-semibold text-white uppercase transition-all duration-300 hover:scale-[1.02] hover:bg-primary/90"
+                  >
+                    {activeSpotlight.cta}
+                  </Link>
+
+                  <div className="ml-auto flex items-center gap-2">
+                    <button
+                      type="button"
+                      onClick={goToPreviousSpotlight}
+                      className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-primary/25 bg-primary/10 text-secondary transition-colors duration-300 hover:bg-primary hover:text-white dark:text-white"
+                      aria-label="Show previous spotlight event"
+                    >
+                      <ChevronLeft className="h-5 w-5" />
+                    </button>
+                    <button
+                      type="button"
+                      onClick={goToNextSpotlight}
+                      className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-primary/25 bg-primary/10 text-secondary transition-colors duration-300 hover:bg-primary hover:text-white dark:text-white"
+                      aria-label="Show next spotlight event"
+                    >
+                      <ChevronRight className="h-5 w-5" />
+                    </button>
                   </div>
                 </div>
-                <div className="group rounded-2xl border border-primary/20 bg-primary/5 px-4 py-3 text-secondary transition-all duration-300 hover:-translate-y-1 hover:border-primary/45 hover:bg-primary/10 hover:shadow-[0_12px_30px_rgba(0,0,0,0.08)] dark:bg-secondary/10 dark:text-white dark:hover:bg-secondary/20">
-                  <div className="flex items-center gap-3">
-                    <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-primary/15 text-primary transition-colors duration-300 group-hover:bg-primary group-hover:text-white dark:bg-secondary/20 dark:text-white dark:group-hover:bg-primary dark:group-hover:text-white">
-                      <Building2
-                        aria-hidden="true"
-                        className="h-4 w-4 shrink-0"
-                      />
-                    </span>
-                    <span>
-                      Bangladesh China Friendship Conference Centre (BCFCC)
-                    </span>
-                  </div>
-                </div>
-              </div>
-
-              <p className="max-w-4xl text-sm leading-relaxed text-secondary/75 sm:text-base dark:text-white/75">
-                The event will bring together celebrities, entrepreneurs,
-                corporate leaders, and global personalities under one
-                prestigious platform.
-              </p>
-
-              <div className="pt-2">
-                <Link
-                  href="/risba-2026"
-                  className="inline-flex items-center justify-center rounded-md bg-primary px-8 py-3 text-sm font-semibold text-white uppercase transition-all duration-300 hover:scale-[1.02] hover:bg-primary/90"
-                >
-                  View Event Details
-                </Link>
-              </div>
-            </div>
+              </motion.div>
+            </AnimatePresence>
           </div>
         </motion.section>
       </section>

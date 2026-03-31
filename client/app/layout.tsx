@@ -23,7 +23,7 @@ const fontMono = Geist_Mono({
 })
 
 export const metadata: Metadata = {
-  title: "Rangs Production",
+  title: "Rang Production",
   description: "A Global Entertainment Platform",
 }
 

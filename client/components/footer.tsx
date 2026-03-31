@@ -62,25 +62,6 @@ export default function Footer() {
                 </Link>
               ))}
             </div>
-
-            <div className="rounded-2xl border border-primary/30 bg-primary/8 p-5">
-              <p className="text-xs font-semibold tracking-[0.18em] text-primary uppercase">
-                Contact Info
-              </p>
-              <p className="mt-3 text-sm text-white/85">{officeAddress}</p>
-              <Link
-                href={`mailto:${contactEmail}`}
-                className="mt-2 block text-sm text-white/85 transition-colors hover:text-primary"
-              >
-                {contactEmail}
-              </Link>
-              <Link
-                href="tel:+15149628662"
-                className="mt-1 block text-sm text-white/85 transition-colors hover:text-primary"
-              >
-                {contactPhone}
-              </Link>
-            </div>
           </div>
 
           <div className="flex flex-col items-center gap-3 lg:items-end">
@@ -110,7 +91,13 @@ export default function Footer() {
 
         <div className="mt-8 flex flex-col items-center justify-between gap-2 border-t border-primary/20 pt-6 text-center text-sm text-white/70 md:flex-row">
           <p>Copyright {currentYear} Rangs Production. All rights reserved.</p>
-          <p>Developed by Atomic Digital</p>
+          <Link
+            href="https://www.facebook.com/lifeatatomic"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Developed by Atomic Digital
+          </Link>
         </div>
       </div>
     </footer>
