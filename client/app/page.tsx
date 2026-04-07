@@ -197,21 +197,6 @@ export default function Page() {
 
   const spotlightEvents = [
     {
-      kicker: "Next Event",
-      title: "RISBA 2026",
-      subtitle: "Rang International Star & Business Awards - Season 2",
-      description:
-        "An international awards ceremony recognizing excellence across entertainment, business, leadership, and entrepreneurship.",
-      location: "Dhaka, Bangladesh",
-      date: "November 2026",
-      venue: "Bangladesh China Friendship Conference Centre (BCFCC)",
-      details:
-        "The event will bring together celebrities, entrepreneurs, corporate leaders, and global personalities under one prestigious platform.",
-      href: "/risba-2026",
-      cta: "View Event Details",
-      backgroundImage: "/venue-risba.jpeg",
-    },
-    {
       kicker: "Live Concert",
       title: "VISHAL-SHEKHAR LIVE IN MONTREAL",
       subtitle: "Bollywood's Hitmakers - A Night to Remember",
@@ -225,6 +210,21 @@ export default function Page() {
       href: "/veshal-shekhar-live-in-montreal",
       cta: "View Event Details",
       backgroundImage: "/venue-montreal.jpeg",
+    },
+    {
+      kicker: "Next Event",
+      title: "RISBA 2026",
+      subtitle: "Rang International Star & Business Awards - Season 2",
+      description:
+        "An international awards ceremony recognizing excellence across entertainment, business, leadership, and entrepreneurship.",
+      location: "Dhaka, Bangladesh",
+      date: "November 2026",
+      venue: "Bangladesh China Friendship Conference Centre (BCFCC)",
+      details:
+        "The event will bring together celebrities, entrepreneurs, corporate leaders, and global personalities under one prestigious platform.",
+      href: "/risba-2026",
+      cta: "View Event Details",
+      backgroundImage: "/venue-risba.jpeg",
     },
   ]
 
