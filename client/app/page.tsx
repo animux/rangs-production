@@ -194,6 +194,35 @@ export default function Page() {
   const [showImpactCounters, setShowImpactCounters] = useState(false)
   const [spotlightIndex, setSpotlightIndex] = useState(0)
   const [touchStartX, setTouchStartX] = useState<number | null>(null)
+  const [heroMessageIndex, setHeroMessageIndex] = useState(0)
+
+  const heroMessages = [
+    {
+      title: "Bollywood Hit Makers Vishal-Shekhar Live in Montreal",
+      description:
+        "From iconic anthems to crowd-favorite blockbusters, witness a spectacular evening of music, entertainment, and world-class live performance with the celebrated duo.",
+      id: 0,
+    },
+    {
+      title: (
+        <>
+          After Success in Canada, RISBA Arrives in{" "}
+          <span className="underline">Bangladesh</span>
+        </>
+      ),
+      description:
+        "The Rang International Star & Business Awards returns with Season 2 — bringing together global celebrities, industry leaders, and cultural icons on one prestigious stage in Dhaka.",
+      id: 1,
+    },
+  ]
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setHeroMessageIndex((previous) => (previous + 1) % heroMessages.length)
+    }, 10000)
+
+    return () => clearInterval(intervalId)
+  }, [heroMessages.length])
 
   const spotlightEvents = [
     {
@@ -335,6 +364,11 @@ export default function Page() {
           playsInline
           className="absolute inset-0 h-full w-full object-cover"
         >
+          <source
+            src="/hero-video-phone.mp4"
+            type="video/mp4"
+            media="(max-width: 767px)"
+          />
           <source src="/hero-video.mp4" type="video/mp4" />
         </video>
         <div className="pointer-events-none absolute inset-0 bg-linear-to-b from-black/20 via-black/40 to-black/80" />
@@ -352,22 +386,38 @@ export default function Page() {
           className="relative z-10 w-full"
         >
           <div className="mx-auto max-w-6xl space-y-5 px-5 sm:space-y-6">
-            <h2 className="max-w-4xl text-xl leading-tight font-bold text-primary sm:text-4xl lg:text-5xl">
-              After Success in Canada, RISBA Arrives in{" "}
-              <span className="underline">Bangladesh</span>
-            </h2>
-            <p className="max-w-3xl text-xs leading-relaxed text-white/90 sm:text-lg lg:text-xl">
-              The Rang International Star & Business Awards returns with Season
-              2 — bringing together global celebrities, industry leaders, and
-              cultural icons on one prestigious stage in Dhaka.
-            </p>
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={heroMessageIndex}
+                initial={{ opacity: 0, y: 14 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -14 }}
+                transition={{ duration: 0.5, ease: "easeInOut" }}
+                className="space-y-5"
+              >
+                <h2 className="max-w-4xl text-xl leading-tight font-bold text-primary sm:text-4xl lg:text-5xl">
+                  {heroMessages[heroMessageIndex].title}
+                </h2>
+                <p className="max-w-3xl text-xs leading-relaxed text-white/90 sm:text-lg lg:text-xl">
+                  {heroMessages[heroMessageIndex].description}
+                </p>
+              </motion.div>
+            </AnimatePresence>
             <div className="flex flex-col gap-3 pt-2 sm:flex-row sm:gap-2">
               <Button
                 variant="outline"
-                className="w-full cursor-pointer rounded border-primary bg-black/20 px-8 py-6 text-xs font-extrabold text-primary transition-all duration-300 hover:bg-primary hover:text-secondary sm:w-auto"
+                className="w-full cursor-pointer rounded border-primary bg-black/20 px-8 py-6 text-xs font-extrabold text-primary uppercase transition-all duration-300 hover:bg-primary! hover:text-secondary sm:w-auto"
                 size="lg"
               >
-                <Link href="/risba-2026">Explore RISBA 2026</Link>
+                <Link
+                  href={
+                    heroMessages[heroMessageIndex].id === 1
+                      ? "/risba-2026"
+                      : "https://espacestdenis.ticketpro.ca/en/pages/1688813057"
+                  }
+                >
+                  Explore Event
+                </Link>
               </Button>
               <Button
                 variant="default"
