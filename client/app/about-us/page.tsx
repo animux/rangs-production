@@ -114,7 +114,7 @@ export default function Page() {
             </p>
             <div className="mt-4 flex flex-row items-center gap-3">
               <img
-                src="/founder.png"
+                src="/founder.PNG"
                 alt="Founder"
                 className="h-20 w-20 rounded-full object-cover"
               />
