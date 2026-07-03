@@ -247,7 +247,7 @@ export default function Page() {
       description:
         "An international awards ceremony recognizing excellence across entertainment, business, leadership, and entrepreneurship.",
       location: "Dhaka, Bangladesh",
-      date: "19 November 2026",
+      date: "12 November 2026",
       venue: "Bangladesh China Friendship Conference Centre (BCFCC)",
       details:
         "The event will bring together celebrities, entrepreneurs, corporate leaders, and global personalities under one prestigious platform.",
